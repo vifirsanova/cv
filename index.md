@@ -1,16 +1,5 @@
 ## Welcome to GitHub Pages
 
-Фирсанова Виктория Игоревна 
-СПбГУ, магистрантка
-пр. Солидарности, 27к1
-Санкт-Петербург, Россия, 193312
-+7 (904) 337-26-20
-vifirsanova@gmail.com
-https://twitter.com/vifirsanova 
-https://github.com/vifirsanova/
-https://spbu.academia.edu/VictoriaFirsanova 
-https://scholar.google.com/citations?user=SJ0a5oAAAAAJ 
-
 Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
 
 ### Markdown
