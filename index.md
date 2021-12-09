@@ -17,7 +17,7 @@ I'm a master student from [Saint Petersburg State University](https://english.sp
 * [Huawei: Natural Language Processing](https://stepik.org/cert/870541)
 * [IBM: Introduction to Artificial Intelligence (AI), Coursera](https://www.coursera.org/account/accomplishments/verify/LD2E2Q4BCQDL)
 
-### My publications
+### My latest publications
 
 * *[The Advantages of Human Evaluation of Sociomedical Question Answering Systems](http://www.injoit.org/index.php/j1/article/view/1227)*
 
@@ -32,6 +32,10 @@ Abstract: The study presents the Autism Spectrum Disorder Question Answering Dat
 
 Abstract: The study focuses on building an informational Russian language chatbot, which aims to answer neurotypical and atypical people’s questions about the inclusion of people with autism spectrum disorder and Asperger syndrome, in particular. Assuming that lack of awareness about the inclusion process and characteristics of people with special needs might cause communication difficulties or even conflicts between pupils, university and college students, or co-workers, a chatbot, which is based on reliable sources, provides the information informally and allows asking uncomfortable questions, could perhaps reduce stress levels during the inclusion. The paper describes two conceptual models of the chatbot. The first one is based on traditional language modeling with GPT-2, and the second one is based on BERT applied to question answering. The training data is collected from the informational websites about ASD, and its usage is agreed with the administration. For training BERT for question answering, the dataset structure was transformed according to the Stanford Question Answering Dataset (SQuAD). F1-score and perplexity metrics were used to evaluate the systems. The study shows the effectiveness of building conceptual models in tracking weaknesses and making significant adjustments at the design stage.
 
+* More:
+** [Google Scholar](https://scholar.google.com/citations?user=SJ0a5oAAAAAJ&hl=de&oi=ao)
+** [Academia.edu](https://spbu.academia.edu/VictoriaFirsanova)
+
 ### My datasets
 
 * [Autism Spectrum Disorder and Asperger Syndrome Question Answering Dataset 1.0](https://figshare.com/articles/dataset/Autism_Spectrum_Disorder_and_Asperger_Syndrome_Question_Answering_Dataset_1_0/13295831)
@@ -40,3 +44,7 @@ A dataset for question-answering used for building an informational Russian lang
 
 
 ### My projects
+
+* [Autism Spectrum Disorder QA](https://ods.ai/projects/asd_qa)
+
+Autism Spectrum Disorder QA, or ASD QA, is a project that supports the inclusion of people with special needs. First of all, it is a dataset for question-answering used for building an informational Russian language chatbot for the inclusion of people with autism spectrum disorder and Asperger syndrome in particular, based on the data from the informational website. The usage of the data is agreed.
