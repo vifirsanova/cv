@@ -1,4 +1,4 @@
-## Hi! My name  is Victoria Firsanova (she/her/they). I am NLP/ConvAI researcher.
+## Hi! My name  is Victoria Firsanova (she/her). I am NLP/ConvAI researcher.
 
 ![img](https://sun9-21.userapi.com/impg/7MdMt4mG-vrCDruN7qYGN5wuVT1VxTAV-sJ5DA/4LHigBKfGig.jpg?size=1200x1600&quality=95&sign=365cd6845fa8111157856fc5af417ca9&type=album)
 
