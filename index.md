@@ -4,34 +4,11 @@
 
 I'm a master student from [Saint Petersburg State University](https://english.spbu.ru). I am developing apps for marginalised communities. For some time I was researching the language of drug addicts, and the aim of my current project is to create an app on autism awareness. 
 
-### Markdown
+### My publications
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+* *[The Advantages of Human Evaluation of Sociomedical Question Answering Systems](http://www.injoit.org/index.php/j1/article/view/1227)*
 
-```markdown
-Syntax highlighted code block
+Abstract: The paper presents a study on question answering systems evaluation. The purpose of the study is to determine if human evaluation is indeed necessary to qualitatively measure the performance of a sociomedical dialogue system. The study is based on the data from several natural language processing experiments conducted with a question answering dataset for inclusion of people with autism spectrum disorder and state-of-the-art models with the Transformer architecture. The study describes model-centric experiments on generative and extractive question answering and data-centric experiments on dataset tuning. The purpose of both model- and data-centric approaches is to reach the highest F1-Score. Although F1-Score and Exact Match are well-known automated evaluation metrics for question answering, their reliability in measuring the performance of sociomedical systems, in which outputs should be not only consistent but also psychologically safe, is questionable. Considering this idea, the author of the paper experimented with human evaluation of a dialogue system for inclusion developed in the previous phase of the work. The result of the study is the analysis of the advantages and disadvantages of automated and human approaches to evaluate conversational artificial intelligence systems, in which the psychological safety of a user is essential.
 
-# Header 1
-## Header 2
-### Header 3
 
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
-```
-
-For more details see [Basic writing and formatting syntax](https://docs.github.com/en/github/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/vifirsanova/resume/settings/pages). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+* 
