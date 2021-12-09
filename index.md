@@ -34,6 +34,9 @@ Abstract: The study focuses on building an informational Russian language chatbo
 
 ### My datasets
 
+* [Autism Spectrum Disorder and Asperger Syndrome Question Answering Dataset 1.0](https://figshare.com/articles/dataset/Autism_Spectrum_Disorder_and_Asperger_Syndrome_Question_Answering_Dataset_1_0/13295831)
+
+A dataset for question-answering used for building an informational Russian language chatbot for the inclusion of people with autism spectrum disorder and Asperger syndrome in particular, based on data from the following website: [aspergers.ru](https://aspergers.ru).
 
 
 ### My projects
