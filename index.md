@@ -12,6 +12,11 @@ I'm a master student from [Saint Petersburg State University](https://english.sp
 * [Summer School of Machine Learning (SMILES) 2020](https://smiles.skoltech.ru/school)
 * [Fall School for Formal Syntax and Formal Semantics (3-FS), Moscow, 2019](https://hum.hse.ru/fml/school-call)
 
+* [Deeplearning.AI Natural Language Processing with Attention Models, Coursera](https://www.coursera.org/account/accomplishments/verify/U7MVPZJ84MTP)
+* [Bayesian Statistics: From Concept to Data Analysis, Coursera](https://www.coursera.org/account/accomplishments/verify/FBYTBSM8STM7)
+* [Huawei: Natural Language Processing](https://stepik.org/cert/870541)
+* [IBM: Introduction to Artificial Intelligence (AI), Coursera](https://www.coursera.org/account/accomplishments/verify/LD2E2Q4BCQDL)
+
 ### My publications
 
 * *[The Advantages of Human Evaluation of Sociomedical Question Answering Systems](http://www.injoit.org/index.php/j1/article/view/1227)*
