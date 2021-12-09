@@ -2,7 +2,7 @@
 
 ![img](https://sun9-21.userapi.com/impg/7MdMt4mG-vrCDruN7qYGN5wuVT1VxTAV-sJ5DA/4LHigBKfGig.jpg?size=1200x1600&quality=95&sign=365cd6845fa8111157856fc5af417ca9&type=album)
 
-I'm a master student from [Saint Petersburg State University](https://english.spbu.ru). I am developing apps for marginalised communities. For some time I was researching the language of drug addicts, and the aim of my current project is to create an app on autism awareness. 
+I'm a master student from [Saint Petersburg State University](https://english.spbu.ru). I am developing apps for marginalised communities. For some time I was researching the language of drug addicts, and the aim of my current project is to create an app on autism awareness. You can find more about the project on autism on the [Open Data Science page](https://ods.ai/projects/asd_qa).
 
 ### My publications
 
@@ -14,3 +14,8 @@ Abstract: The paper presents a study on question answering systems evaluation. T
 * *[The Description of the Autism Spectrum Disorder Question Answering Dataset](http://www.dialog-21.ru/en/dialogue2021/results/dopmat/2021/students/)*
 
 Abstract: The study presents the Autism Spectrum Disorder Question Answering Dataset (ASD QA), a new Russian dataset based on the structure of the Stanford Question Answering Dataset (SQuAD), a machine reading comprehension dataset. The ASD QA dataset is a work in progress. The dataset version described in the paper consists of 1,134 question-answer pairs compiled by the author of the paper from the information website for individuals with autism spectrum disorders (ASD) and Asperger’s syndrome and their parents. The paper also describes several question-answering models built to analyze the dataset.
+
+* *[Supporting the Inclusion of People with Asperger Syndrome: Building a Customizable Chatbot with Transfer Learning](https://esignals.fi/research/en/2021/01/20/supporting-the-inclusion-of-people-with-asperger-syndrome-building-a-customizable-chatbot-with-transfer-learning/)*
+
+Abstract: The study focuses on building an informational Russian language chatbot, which aims to answer neurotypical and atypical people’s questions about the inclusion of people with autism spectrum disorder and Asperger syndrome, in particular. Assuming that lack of awareness about the inclusion process and characteristics of people with special needs might cause communication difficulties or even conflicts between pupils, university and college students, or co-workers, a chatbot, which is based on reliable sources, provides the information informally and allows asking uncomfortable questions, could perhaps reduce stress levels during the inclusion. The paper describes two conceptual models of the chatbot. The first one is based on traditional language modeling with GPT-2, and the second one is based on BERT applied to question answering. The training data is collected from the informational websites about ASD, and its usage is agreed with the administration. For training BERT for question answering, the dataset structure was transformed according to the Stanford Question Answering Dataset (SQuAD). F1-score and perplexity metrics were used to evaluate the systems. The study shows the effectiveness of building conceptual models in tracking weaknesses and making significant adjustments at the design stage.
+
