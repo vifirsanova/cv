@@ -1,6 +1,6 @@
 ## Victoria Firsanova
 
-![https://sun9-21.userapi.com/impg/7MdMt4mG-vrCDruN7qYGN5wuVT1VxTAV-sJ5DA/4LHigBKfGig.jpg?size=1200x1600&quality=95&sign=365cd6845fa8111157856fc5af417ca9&type=album]
+![img](https://sun9-21.userapi.com/impg/7MdMt4mG-vrCDruN7qYGN5wuVT1VxTAV-sJ5DA/4LHigBKfGig.jpg?size=1200x1600&quality=95&sign=365cd6845fa8111157856fc5af417ca9&type=album)
 
 Whenever you commit to this repository, GitHub Pages will [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
 
