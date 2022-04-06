@@ -8,6 +8,7 @@ I'm a master student from [Saint Petersburg State University](https://english.sp
 
 * 2016-2020: Higher School of Economics, Russia. BA, Philology
 
+* [TU Berlin Winter School 2021: Introduction to Artificial Intelligence](https://www.winter-university.tu-berlin.de/)
 * Vladimir Potanin Foundation School 2021: Pro Bono, Agile, Networking
 * [Summer School of Machine Learning (SMILES) 2020](https://smiles.skoltech.ru/school)
 * [Fall School for Formal Syntax and Formal Semantics (3-FS), Moscow, 2019](https://hum.hse.ru/fml/school-call)
