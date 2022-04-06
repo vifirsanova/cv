@@ -1,6 +1,6 @@
 ## Hi! My name  is Victoria Firsanova (she/her). I am NLP/ConvAI researcher.
 
-![img](https://sun9-21.userapi.com/impg/7MdMt4mG-vrCDruN7qYGN5wuVT1VxTAV-sJ5DA/4LHigBKfGig.jpg?size=1200x1600&quality=95&sign=365cd6845fa8111157856fc5af417ca9&type=album)
+![img](https://sun9-30.userapi.com/impg/JiIg8Lij3vcV5JyVKCChLTp1v_eprba3XHIISQ/EpWn_WLOeiM.jpg?size=2560x1920&quality=96&sign=10005abfb3d744997195b0d592890f6c&type=album)
 
 I'm a master student from [Saint Petersburg State University](https://english.spbu.ru). I am developing apps for marginalised communities. For some time I was researching the language of drug addicts, and the aim of my current project is to create an app on autism awareness. You can find more about the project on autism on the [Open Data Science page](https://ods.ai/projects/asd_qa).
 
