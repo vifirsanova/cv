@@ -1,6 +1,7 @@
 body {
-  background-color: black;
+  background-color: dimgray;
 }
 h1 {
-  color: white;  
+  color: white; 
+  font-family: Helvetica;
 }
