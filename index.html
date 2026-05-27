@@ -1,94 +1,662 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Prove me wrong</title>
-    <style>
-	    body {
-  background-color: #0F0F11;
-  font-family: Arial, sans-serif;
-  color: #fff;
-  text-align: center;
-}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>Виктория Фирсанова · CV</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-a {
-  color: white;
-  font-size: 20px;
-  color: orange;
-  padding: 0;
-}
+    body {
+      background: #020408;
+      font-family: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
+      font-size: 14px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 2rem 1rem;
+      margin: 0;
+      overflow-x: hidden;
+    }
 
-.subtitle {
-            font-size: 1.5em;
-            color: #888;
-        }
+    .gradient-bg {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      z-index: 0; pointer-events: none;
+      background: 
+        radial-gradient(ellipse at 20% 50%, rgba(80,140,200,0.06) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 20%, rgba(120,100,200,0.05) 0%, transparent 50%),
+        radial-gradient(ellipse at 50% 80%, rgba(60,160,130,0.04) 0%, transparent 50%);
+    }
 
-.author {
-            margin-top: 1em;
-            font-style: italic;
-        }
+    .matrix-bg {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      z-index: 0; pointer-events: none;
+      opacity: 0.15;
+    }
 
-footer {
-            background-color: #333;
-            color: #fff;
-            text-align: center;
-            padding: 1em 0;
-            position: fixed;
-            width: 100%;
-            bottom: 0;
-            font-size: 20px;
-        }
+    .ide-window {
+      width: 100%;
+      max-width: 980px;
+      background: rgba(12, 15, 20, 0.82);
+      backdrop-filter: blur(28px);
+      -webkit-backdrop-filter: blur(28px);
+      border-radius: 20px;
+      box-shadow: 
+        0 30px 70px -15px rgba(0,0,0,0.8), 
+        0 0 0 1px rgba(100,160,200,0.12),
+        inset 0 0 0 1px rgba(255,255,255,0.02);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      z-index: 1;
+    }
 
-div {
-  display: grid;
-  justify-content: center;
-  margin-top: 30px;
-}
+    .ide-window::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: linear-gradient(145deg, rgba(20,30,50,0.3) 0%, rgba(5,8,12,0.6) 100%);
+      border-radius: 20px;
+      pointer-events: none;
+    }
 
-.ds {
-  display: flex;
-  justify-content: left;
-}
-    </style>
+    .title-bar {
+      background: rgba(30, 35, 41, 0.92);
+      padding: 0.6rem 1.2rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      border-bottom: 1px solid rgba(42, 48, 56, 0.6);
+      position: relative;
+      z-index: 2;
+    }
+
+    .dots { display: flex; gap: 0.5rem; margin-right: 1rem; }
+    .dot { width: 13px; height: 13px; border-radius: 50%; cursor: pointer; transition: filter 0.2s; }
+    .dot.red { background: #ff5f57; }
+    .dot.yellow { background: #febc2e; }
+    .dot.green { background: #28c840; }
+    .dot:hover { filter: brightness(1.3); }
+
+    .title-text {
+      color: #8899aa;
+      font-size: 0.8rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(21, 26, 33, 0.8);
+      padding: 0.3rem 0.9rem;
+      border-radius: 8px;
+      margin-left: auto;
+    }
+
+    .photo-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1rem 1.2rem;
+      background: linear-gradient(135deg, rgba(20,28,40,0.9) 0%, rgba(15,20,30,0.9) 100%);
+      border-bottom: 1px solid rgba(100,160,220,0.12);
+      position: relative;
+      z-index: 2;
+    }
+
+    .photo-img {
+      width: 70px;
+      height: 70px;
+      border-radius: 14px;
+      object-fit: cover;
+      border: 2px solid rgba(120,160,220,0.25);
+      box-shadow: 0 0 20px rgba(100,150,220,0.15);
+      flex-shrink: 0;
+    }
+
+    .photo-info {
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+    }
+
+    .photo-name {
+      color: #dde4ee;
+      font-size: 1.1rem;
+      font-weight: 600;
+    }
+
+    .photo-title {
+      color: #8899aa;
+      font-size: 0.75rem;
+      font-style: italic;
+    }
+
+    .editor-body {
+      display: flex;
+      flex: 1;
+      position: relative;
+      z-index: 2;
+      max-height: 65vh;
+    }
+
+    .line-numbers {
+      background: rgba(11, 15, 20, 0.75);
+      color: #3d4a5c;
+      text-align: right;
+      padding: 0.8rem 0.5rem;
+      user-select: none;
+      border-right: 1px solid rgba(33, 38, 45, 0.5);
+      font-size: 0.8rem;
+      line-height: 1.7;
+      min-width: 52px;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    .code-area {
+      flex: 1;
+      padding: 0.8rem 0;
+      color: #c8d6e5;
+      line-height: 1.7;
+      overflow-y: auto;
+      font-size: 0.85rem;
+    }
+
+    .code-area::-webkit-scrollbar { width: 6px; }
+    .code-area::-webkit-scrollbar-track { background: transparent; }
+    .code-area::-webkit-scrollbar-thumb { background: #2a3340; border-radius: 3px; }
+
+    .cpp-keyword { color: #7aa2d4; }
+    .cpp-type { color: #6db3a0; }
+    .cpp-string { color: #c8a080; }
+    .cpp-comment { color: #5a7a5a; font-style: italic; }
+    .cpp-brace { color: #bcc8d8; }
+    .cpp-field { color: #8ab8e8; }
+
+    .line {
+      display: block;
+      padding: 0 1rem;
+      white-space: pre;
+    }
+
+    .line.indent-1 { padding-left: 3rem; }
+    .line.indent-2 { padding-left: 5rem; }
+    .line.indent-3 { padding-left: 7rem; }
+    .line.indent-4 { padding-left: 9rem; }
+
+    details.code-block { display: block; }
+
+    details.code-block > summary {
+      list-style: none;
+      cursor: pointer;
+      display: block;
+      padding: 0 1rem;
+      color: #bcc8d8;
+      user-select: none;
+    }
+
+    details.code-block > summary::-webkit-details-marker { display: none; }
+
+    details.code-block > summary::before {
+      content: "\203A";
+      display: inline-block;
+      font-size: 1.3rem;
+      color: #556677;
+      transition: transform 0.2s, color 0.2s;
+      width: 16px;
+      text-align: center;
+      margin-right: 0.3rem;
+    }
+
+    details.code-block[open] > summary::before {
+      transform: rotate(90deg);
+      color: #8ab8e8;
+    }
+
+    details.code-block > summary:hover { color: #dde4ee; }
+    details.code-block > summary:hover::before { color: #aac8e8; }
+
+    details.code-block .block-content {
+      border-left: 1px dashed rgba(60, 80, 100, 0.3);
+      margin-left: 1.5rem;
+    }
+
+    .status-bar {
+      background: rgba(22, 27, 34, 0.92);
+      border-top: 1px solid rgba(48, 54, 61, 0.6);
+      padding: 0.5rem 1.2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: #667788;
+      font-size: 0.75rem;
+      position: relative;
+      z-index: 2;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    .status-bar i { margin-right: 0.3rem; }
+    .copyright { color: #556677; font-style: italic; }
+
+    a {
+      color: #7ab8c8;
+      text-decoration: none;
+      border-bottom: 1px dotted rgba(122, 184, 200, 0.4);
+    }
+    a:hover { color: #9ad8e8; }
+
+    @media (max-width: 700px) {
+      .line { font-size: 0.7rem; padding: 0 0.5rem; }
+      .line.indent-1 { padding-left: 1.5rem; }
+      .line.indent-2 { padding-left: 2.5rem; }
+      .line.indent-3 { padding-left: 3.5rem; }
+      .line.indent-4 { padding-left: 4.5rem; }
+      .line-numbers { font-size: 0.65rem; min-width: 38px; }
+      .photo-img { width: 50px; height: 50px; }
+    }
+  </style>
 </head>
 <body>
-    <header>
-      <h1>PROVE ME WRONG</h1>
-        <p class="subtitle">Tools for LLM-based linguistic analysis</p>
-        <p class="author">by Victoria Firsanova</p>
-    </header>
-    <div class="content">
-        <p class="link">
-            <a href="https://papers.neurips.cc/paper/2023/file/1234567890abcdef1234567890abcdef-.paper.pdf" target="_blank">Read the NeurIPS paper</a>
-        </p>
+
+<div class="gradient-bg"></div>
+<canvas class="matrix-bg" id="matrixCanvas"></canvas>
+
+<div class="ide-window">
+  <div class="title-bar">
+    <div class="dots">
+      <div class="dot red"></div>
+      <div class="dot yellow"></div>
+      <div class="dot green"></div>
     </div>
-<div>
-<iframe
-	src="https://missvector-synthnet.hf.space"
-	frameborder="0"
-	width="850"
-	height="450"
-></iframe>
+    <div class="title-text">
+      <i class="fas fa-code"></i> firsanova_cv.cpp
+    </div>
+  </div>
+
+  <div class="photo-header">
+    <img class="photo-img" src="https://sun9-3.userapi.com/s/v1/ig2/SfIV_2NWOFEmcG5BJqKkUW_oZK5Tb25mrsvteFHe0B3tW4tZxToEr1MGaHpWHMq8i5xAZmAFsu92vj-JDxtfbzXP.jpg?quality=95&as=32x21,48x32,72x48,108x72,160x107,240x160,360x240,480x321,540x361,640x427,720x481,1080x721,1280x855&from=bu&u=G2yU9zzf1xKM7sDLR37-jaBzDQYFEGT-JfyXK97YOKY&cs=1280x0" alt="Виктория Фирсанова">
+    <div class="photo-info">
+      <div class="photo-name">Виктория Фирсанова</div>
+      <div class="photo-title">ML/NLP researcher · inclusive AI advocate · Санкт-Петербург</div>
+    </div>
+  </div>
+
+  <div class="editor-body">
+    <div class="line-numbers" id="lineNumbers"></div>
+    <div class="code-area" id="codeContent"></div>
+  </div>
+
+  <div class="status-bar">
+    <div><i class="far fa-clock"></i> C++17 · UTF-8 · Санкт-Петербург</div>
+    <div class="copyright">2026, Виктория Фирсанова</div>
+    <div><i class="fas fa-code-branch"></i> main · vifirsanova/cv</div>
+  </div>
 </div>
-<div>
-<iframe
-	src="https://missvector-llm-syntax.hf.space"
-	frameborder="0"
-	width="850"
-	height="450"
-></iframe>
-</div>
-<div class="ds">
-<iframe
-  src="https://huggingface.co/datasets/missvector/multi-wiki-grammar/embed/viewer/default/train?row=2"
-  frameborder="0"
-  width="100%"
-  height="560px"
-></iframe>
-</div>
-      <footer>
-        by <a href=https://github.com/vifirsanova/> missvector</a> &copy; 2024 
-    </footer>
+
+<script>
+  (function() {
+    const canvas = document.getElementById('matrixCanvas');
+    const ctx = canvas.getContext('2d');
+    function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+    resize();
+    window.addEventListener('resize', resize);
+    const chars = 'アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン0123456789<>/{}[]|&^%$#@!';
+    const fs = 15;
+    const cols = Math.floor(canvas.width / fs);
+    const drops = [];
+    for (let i = 0; i < cols; i++) drops[i] = Math.random() * -100;
+    function draw() {
+      ctx.fillStyle = 'rgba(2, 4, 8, 0.06)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = '#6699cc';
+      ctx.font = fs + 'px monospace';
+      for (let i = 0; i < drops.length; i++) {
+        const t = chars[Math.floor(Math.random() * chars.length)];
+        ctx.fillText(t, i * fs, drops[i] * fs);
+        if (drops[i] * fs > canvas.height && Math.random() > 0.97) drops[i] = 0;
+        drops[i]++;
+      }
+    }
+    setInterval(draw, 40);
+  })();
+
+  function line(text, indent) {
+    const cls = indent ? 'line indent-' + indent : 'line';
+    return '<div class="' + cls + '">' + text + '</div>';
+  }
+
+  function buildCV() {
+    const c = document.getElementById('codeContent');
+    
+    let html = '';
+
+    html += line('<span class="cpp-comment">/* Curriculum Vitae · Виктория Фирсанова · 2026 */</span>');
+    html += line('');
+
+    html += '<details class="code-block" open>';
+    html += '<summary>' + line('<span class="cpp-comment">// Идентификаторы исследователя</span>') + '</summary>';
+    html += '<div class="block-content">';
+    html += line('<span class="cpp-keyword">struct</span> <span class="cpp-type">AcademicProfiles</span> <span class="cpp-brace">{</span>');
+    html += line('<span class="cpp-type">string</span> <span class="cpp-field">spin</span>   = <span class="cpp-string">"1088550"</span>;  <span class="cpp-comment">// <a href=\'https://elibrary.ru/author_profile.asp?authorid=1088550\' target=\'_blank\'>eLibrary</a></span>', 1);
+    html += line('<span class="cpp-type">string</span> <span class="cpp-field">orcid</span>  = <span class="cpp-string">"<a href=\'https://orcid.org/0000-0002-8474-0262\' target=\'_blank\'>0000-0002-8474-0262</a>"</span>;', 1);
+    html += line('<span class="cpp-type">string</span> <span class="cpp-field">scopus</span> = <span class="cpp-string">"<a href=\'https://www.scopus.com/authid/detail.uri?authorId=57453911800\' target=\'_blank\'>57453911800</a>"</span>;', 1);
+    html += line('<span class="cpp-type">string</span> <span class="cpp-field">google</span> = <span class="cpp-string">"<a href=\'https://scholar.google.com/citations?user=SJ0a5oAAAAAJ\' target=\'_blank\'>Профиль</a>"</span>;', 1);
+    html += line('<span class="cpp-type">string</span> <span class="cpp-field">academia</span> = <span class="cpp-string">"<a href=\'https://spbu.academia.edu/VictoriaFirsanova\' target=\'_blank\'>Профиль</a>"</span>;', 1);
+    html += line('<span class="cpp-type">string</span> <span class="cpp-field">hf</span>     = <span class="cpp-string">"<a href=\'https://huggingface.co/missvector\' target=\'_blank\'>missvector</a>"</span>;', 1);
+    html += line('<span class="cpp-brace">}</span>;');
+    html += '</div>';
+    html += '</details>';
+    html += '';
+
+    html += '<details class="code-block" open>';
+    html += '<summary>' + line('<span class="cpp-comment">// Образование</span>') + '</summary>';
+    html += '<div class="block-content">';
+    html += line('<span class="cpp-keyword">auto</span> <span class="cpp-field">education</span> = <span class="cpp-brace">{</span>');
+    html += line('');
+    html += line('<span class="cpp-comment">// Аспирантура</span>', 1);
+    html += line('<span class="cpp-brace">{</span>', 1);
+    html += line('<span class="cpp-brace">{</span> <span class="cpp-string">"period"</span>,      <span class="cpp-string">"2025 — наст. время"</span> <span class="cpp-brace">}</span>,', 2);
+    html += line('<span class="cpp-brace">{</span> <span class="cpp-string">"degree"</span>,      <span class="cpp-string">"Аспирантура"</span> <span class="cpp-brace">}</span>,', 2);
+    html += line('<span class="cpp-brace">{</span> <span class="cpp-string">"institution"</span>, <span class="cpp-string">"Университет ИТМО"</span> <span class="cpp-brace">}</span>,', 2);
+    html += line('<span class="cpp-brace">{</span> <span class="cpp-string">"thesis"</span>,      <span class="cpp-string">"Оптимизация LLM на ресурсо-ограниченных платформах"</span> <span class="cpp-brace">}</span>,', 2);
+    html += line('<span class="cpp-brace">}</span>,', 1);
+    html += line('');
+    html += line('<span class="cpp-comment">// Магистратура</span>', 1);
+    html += line('<span class="cpp-brace">{</span>', 1);
+    html += line('<span class="cpp-brace">{</span> <span class="cpp-string">"period"</span>,      <span class="cpp-string">"2020 — 2022"</span> <span class="cpp-brace">}</span>,', 2);
+    html += line('<span class="cpp-brace">{</span> <span class="cpp-string">"degree"</span>,      <span class="cpp-string">"Магистр (диплом с отличием)"</span> <span class="cpp-brace">}</span>,', 2);
+    html += line('<span class="cpp-brace">{</span> <span class="cpp-string">"institution"</span>, <span class="cpp-string">"СПбГУ"</span> <span class="cpp-brace">}</span>,', 2);
+    html += line('<span class="cpp-brace">{</span> <span class="cpp-string">"field"</span>,       <span class="cpp-string">"Математическая лингвистика"</span> <span class="cpp-brace">}</span>,', 2);
+    html += line('<span class="cpp-brace">}</span>,', 1);
+    html += line('');
+    html += line('<span class="cpp-comment">// Бакалавриат</span>', 1);
+    html += line('<span class="cpp-brace">{</span>', 1);
+    html += line('<span class="cpp-brace">{</span> <span class="cpp-string">"period"</span>,      <span class="cpp-string">"2016 — 2020"</span> <span class="cpp-brace">}</span>,', 2);
+    html += line('<span class="cpp-brace">{</span> <span class="cpp-string">"degree"</span>,      <span class="cpp-string">"Бакалавр (диплом с отличием)"</span> <span class="cpp-brace">}</span>,', 2);
+    html += line('<span class="cpp-brace">{</span> <span class="cpp-string">"institution"</span>, <span class="cpp-string">"НИУ ВШЭ"</span> <span class="cpp-brace">}</span>,', 2);
+    html += line('<span class="cpp-brace">{</span> <span class="cpp-string">"field"</span>,       <span class="cpp-string">"Филология"</span> <span class="cpp-brace">}</span>,', 2);
+    html += line('<span class="cpp-brace">}</span>,', 1);
+    html += line('<span class="cpp-brace">}</span>;');
+    html += '</div>';
+    html += '</details>';
+    html += '';
+
+    html += '<details class="code-block" open>';
+    html += '<summary>' + line('<span class="cpp-comment">// Опыт работы</span>') + '</summary>';
+    html += '<div class="block-content">';
+    html += line('<span class="cpp-keyword">auto</span> <span class="cpp-field">work</span> = <span class="cpp-brace">{</span>');
+    html += line('');
+    html += line('<span class="cpp-comment">// НИУ ВШЭ</span>', 1);
+    html += line('<span class="cpp-brace">{</span>', 1);
+    html += line('<span class="cpp-brace">{</span> <span class="cpp-string">"period"</span>,      <span class="cpp-string">"2023 — наст. время"</span> <span class="cpp-brace">}</span>,', 2);
+    html += line('<span class="cpp-brace">{</span> <span class="cpp-string">"role"</span>,        <span class="cpp-string">"Преподаватель"</span> <span class="cpp-brace">}</span>,', 2);
+    html += line('<span class="cpp-brace">{</span> <span class="cpp-string">"institution"</span>, <span class="cpp-string">"НИУ ВШЭ, Санкт-Петербург"</span> <span class="cpp-brace">}</span>,', 2);
+    html += line('<span class="cpp-brace">{</span> <span class="cpp-string">"courses"</span>,     <span class="cpp-string">"Цифровая грамотность, Компьютерная лингвистика"</span> <span class="cpp-brace">}</span>,', 2);
+    html += line('<span class="cpp-brace">{</span> <span class="cpp-string">""</span>,             <span class="cpp-string">"Диалоговые системы, Академические и прикладные навыки"</span> <span class="cpp-brace">}</span>,', 2);
+    html += line('<span class="cpp-brace">{</span> <span class="cpp-string">""</span>,             <span class="cpp-string">"Python (базовый/продвинутый), Введение в машинное обучение"</span> <span class="cpp-brace">}</span>,', 2);
+    html += line('<span class="cpp-brace">{</span> <span class="cpp-string">"projects"</span>,    <span class="cpp-string">"Модель Эрмитажа, чат-бот поиска фильмов"</span> <span class="cpp-brace">}</span>,', 2);
+    html += line('<span class="cpp-brace">{</span> <span class="cpp-string">""</span>,             <span class="cpp-string">"RAG с Severstal, синтетический датасет LLM"</span> <span class="cpp-brace">}</span>,', 2);
+    html += line('<span class="cpp-brace">{</span> <span class="cpp-string">""</span>,             <span class="cpp-string">"Виртуальный ассистент, конф. «Язык. Текст. Цифра»"</span> <span class="cpp-brace">}</span>,', 2);
+    html += line('<span class="cpp-brace">}</span>,', 1);
+    html += line('');
+    html += line('<span class="cpp-comment">// НИУ МИЭТ</span>', 1);
+    html += line('<span class="cpp-brace">{</span>', 1);
+    html += line('<span class="cpp-brace">{</span> <span class="cpp-string">"period"</span>,      <span class="cpp-string">"2024 — наст. время"</span> <span class="cpp-brace">}</span>,', 2);
+    html += line('<span class="cpp-brace">{</span> <span class="cpp-string">"role"</span>,        <span class="cpp-string">"Преподаватель"</span> <span class="cpp-brace">}</span>,', 2);
+    html += line('<span class="cpp-brace">{</span> <span class="cpp-string">"institution"</span>, <span class="cpp-string">"НИУ МИЭТ, Москва"</span> <span class="cpp-brace">}</span>,', 2);
+    html += line('<span class="cpp-brace">{</span> <span class="cpp-string">"courses"</span>,     <span class="cpp-string">"Нейронные сети для NLP"</span> <span class="cpp-brace">}</span>,', 2);
+    html += line('<span class="cpp-brace">{</span> <span class="cpp-string">""</span>,             <span class="cpp-string">"Функциональные и когнитивные модели в лингвистике"</span> <span class="cpp-brace">}</span>,', 2);
+    html += line('<span class="cpp-brace">}</span>,', 1);
+    html += line('');
+    html += line('<span class="cpp-comment">// IT-консультант</span>', 1);
+    html += line('<span class="cpp-brace">{</span>', 1);
+    html += line('<span class="cpp-brace">{</span> <span class="cpp-string">"period"</span>,      <span class="cpp-string">"2024 — наст. время"</span> <span class="cpp-brace">}</span>,', 2);
+    html += line('<span class="cpp-brace">{</span> <span class="cpp-string">"role"</span>,        <span class="cpp-string">"IT-консультант (самозанятость)"</span> <span class="cpp-brace">}</span>,', 2);
+    html += line('<span class="cpp-brace">{</span> <span class="cpp-string">"description"</span>, <span class="cpp-string">"Стартапы, НКО, малый бизнес — AI/ML"</span> <span class="cpp-brace">}</span>,', 2);
+    html += line('<span class="cpp-brace">}</span>,', 1);
+    html += line('');
+    html += line('<span class="cpp-comment">// Компьютерная академия ТОП</span>', 1);
+    html += line('<span class="cpp-brace">{</span>', 1);
+    html += line('<span class="cpp-brace">{</span> <span class="cpp-string">"period"</span>,      <span class="cpp-string">"2024 — 2025"</span> <span class="cpp-brace">}</span>,', 2);
+    html += line('<span class="cpp-brace">{</span> <span class="cpp-string">"role"</span>,        <span class="cpp-string">"Автор курсов"</span> <span class="cpp-brace">}</span>,', 2);
+    html += line('<span class="cpp-brace">{</span> <span class="cpp-string">"institution"</span>, <span class="cpp-string">"Компьютерная академия ТОП"</span> <span class="cpp-brace">}</span>,', 2);
+    html += line('<span class="cpp-brace">}</span>,', 1);
+    html += line('<span class="cpp-brace">}</span>;');
+    html += '</div>';
+    html += '</details>';
+    html += '';
+
+    html += '<details class="code-block" open>';
+    html += '<summary>' + line('<span class="cpp-comment">// Ключевые проекты</span>') + '</summary>';
+    html += '<div class="block-content">';
+    html += line('<span class="cpp-keyword">auto</span> <span class="cpp-field">projects</span> = <span class="cpp-brace">{</span>');
+    html += line('');
+    html += line('<span class="cpp-comment">// llama-dynamic-context</span>', 1);
+    html += line('<span class="cpp-brace">{</span> <span class="cpp-string">"llama-dynamic-context"</span>, <span class="cpp-brace">{</span>', 1);
+    html += line('<span class="cpp-brace">{</span> <span class="cpp-string">"desc"</span>,    <span class="cpp-string">"Форк llama.cpp с динамическим KV-кэшем"</span> <span class="cpp-brace">}</span>,', 2);
+    html += line('<span class="cpp-brace">{</span> <span class="cpp-string">"metrics"</span>, <span class="cpp-string">"16-20 токенов/сек, 85% сохранения контекста"</span> <span class="cpp-brace">}</span>,', 2);
+    html += line('<span class="cpp-brace">{</span> <span class="cpp-string">"tech"</span>,    <span class="cpp-string">"C++, KV-cache optimization, GGUF"</span> <span class="cpp-brace">}</span>,', 2);
+    html += line('<span class="cpp-brace">{</span> <span class="cpp-string">"url"</span>,     <span class="cpp-string">"<a href=\'https://github.com/vifirsanova/llama-dynamic-context\' target=\'_blank\'>GitHub</a>"</span> <span class="cpp-brace">}</span>,', 2);
+    html += line('<span class="cpp-brace">}</span> <span class="cpp-brace">}</span>,', 1);
+    html += line('');
+    html += line('<span class="cpp-comment">// LinLM Dataset</span>', 1);
+    html += line('<span class="cpp-brace">{</span> <span class="cpp-string">"LinLM_Dataset"</span>, <span class="cpp-brace">{</span>', 1);
+    html += line('<span class="cpp-brace">{</span> <span class="cpp-string">"desc"</span>,  <span class="cpp-string">"Синтетический датасет Linux-команд на 10+ языках"</span> <span class="cpp-brace">}</span>,', 2);
+    html += line('<span class="cpp-brace">{</span> <span class="cpp-string">"stars"</span>, <span class="cpp-string">"94 звезды на Hugging Face"</span> <span class="cpp-brace">}</span>,', 2);
+    html += line('<span class="cpp-brace">{</span> <span class="cpp-string">"tech"</span>,  <span class="cpp-string">"Python, HuggingFace Datasets"</span> <span class="cpp-brace">}</span>,', 2);
+    html += line('<span class="cpp-brace">{</span> <span class="cpp-string">"url"</span>,   <span class="cpp-string">"<a href=\'https://huggingface.co/missvector/linux-commands\' target=\'_blank\'>Hugging Face</a>"</span> <span class="cpp-brace">}</span>,', 2);
+    html += line('<span class="cpp-brace">}</span> <span class="cpp-brace">}</span>,', 1);
+    html += line('');
+    html += line('<span class="cpp-comment">// EMPI Agent</span>', 1);
+    html += line('<span class="cpp-brace">{</span> <span class="cpp-string">"EMPI_Agent"</span>, <span class="cpp-brace">{</span>', 1);
+    html += line('<span class="cpp-brace">{</span> <span class="cpp-string">"desc"</span>,   <span class="cpp-string">"Мультиагентный фреймворк для инклюзивного образования"</span> <span class="cpp-brace">}</span>,', 2);
+    html += line('<span class="cpp-brace">{</span> <span class="cpp-string">"comps"</span>,   <span class="cpp-string">"TextAnalyzer, FeedbackAgent, InterfaceGenerator"</span> <span class="cpp-brace">}</span>,', 2);
+    html += line('<span class="cpp-brace">{</span> <span class="cpp-string">"tech"</span>,    <span class="cpp-string">"Python (spaCy, textstat), C++, Node.js, WCAG 2.1"</span> <span class="cpp-brace">}</span>,', 2);
+    html += line('<span class="cpp-brace">{</span> <span class="cpp-string">"url"</span>,     <span class="cpp-string">"<a href=\'https://github.com/vifirsanova/empi_agent\' target=\'_blank\'>GitHub</a>"</span> <span class="cpp-brace">}</span>,', 2);
+    html += line('<span class="cpp-brace">}</span> <span class="cpp-brace">}</span>,', 1);
+    html += line('');
+    html += line('<span class="cpp-comment">// shellrec</span>', 1);
+    html += line('<span class="cpp-brace">{</span> <span class="cpp-string">"shellrec"</span>, <span class="cpp-brace">{</span>', 1);
+    html += line('<span class="cpp-brace">{</span> <span class="cpp-string">"desc"</span>, <span class="cpp-string">"Минималистичный рекордер экрана для Arch Linux"</span> <span class="cpp-brace">}</span>,', 2);
+    html += line('<span class="cpp-brace">{</span> <span class="cpp-string">"feat"</span>, <span class="cpp-string">"X11/Wayland, 5 пресетов FFmpeg"</span> <span class="cpp-brace">}</span>,', 2);
+    html += line('<span class="cpp-brace">{</span> <span class="cpp-string">"tech"</span>, <span class="cpp-string">"Shell, FFmpeg"</span> <span class="cpp-brace">}</span>,', 2);
+    html += line('<span class="cpp-brace">{</span> <span class="cpp-string">"url"</span>,  <span class="cpp-string">"<a href=\'https://github.com/vifirsanova/shellrec\' target=\'_blank\'>GitHub</a>"</span> <span class="cpp-brace">}</span>,', 2);
+    html += line('<span class="cpp-brace">}</span> <span class="cpp-brace">}</span>,', 1);
+    html += line('');
+    html += line('<span class="cpp-comment">// Виртуальный ассистент</span>', 1);
+    html += line('<span class="cpp-brace">{</span> <span class="cpp-string">"Виртуальный ассистент"</span>, <span class="cpp-brace">{</span>', 1);
+    html += line('<span class="cpp-brace">{</span> <span class="cpp-string">"desc"</span>, <span class="cpp-string">"Function-calling ассистент для нейроотличных студентов"</span> <span class="cpp-brace">}</span>,', 2);
+    html += line('<span class="cpp-brace">{</span> <span class="cpp-string">"team"</span>, <span class="cpp-string">"Марголина А.В., Хлусова Я.К. и др."</span> <span class="cpp-brace">}</span>,', 2);
+    html += line('<span class="cpp-brace">}</span> <span class="cpp-brace">}</span>,', 1);
+    html += line('<span class="cpp-brace">}</span>;');
+    html += '</div>';
+    html += '</details>';
+    html += '';
+
+    html += '<details class="code-block" open>';
+    html += '<summary>' + line('<span class="cpp-comment">// Социальные инициативы</span>') + '</summary>';
+    html += '<div class="block-content">';
+    html += line('<span class="cpp-keyword">auto</span> <span class="cpp-field">social</span> = <span class="cpp-brace">{</span>');
+    html += line('');
+    html += line('<span class="cpp-comment">// Инклюзивное IT-сообщество</span>', 1);
+    html += line('<span class="cpp-brace">{</span> <span class="cpp-string">"inclusive_community"</span>, <span class="cpp-brace">{</span>', 1);
+    html += line('<span class="cpp-brace">{</span> <span class="cpp-string">"role"</span>,    <span class="cpp-string">"Основатель и руководитель"</span> <span class="cpp-brace">}</span>,', 2);
+    html += line('<span class="cpp-brace">{</span> <span class="cpp-string">"name"</span>,    <span class="cpp-string">"Первое инклюзивное IT-сообщество Санкт-Петербурга"</span> <span class="cpp-brace">}</span>,', 2);
+    html += line('<span class="cpp-brace">{</span> <span class="cpp-string">"support"</span>, <span class="cpp-string">"Фонд Потанина, проект «Траектория роста»"</span> <span class="cpp-brace">}</span>,', 2);
+    html += line('<span class="cpp-brace">}</span> <span class="cpp-brace">}</span>,', 1);
+    html += line('');
+    html += line('<span class="cpp-comment">// IT-профориентация</span>', 1);
+    html += line('<span class="cpp-brace">{</span> <span class="cpp-string">"career_guidance"</span>, <span class="cpp-brace">{</span>', 1);
+    html += line('<span class="cpp-brace">{</span> <span class="cpp-string">"year"</span>,  <span class="cpp-string">"2025"</span> <span class="cpp-brace">}</span>,', 2);
+    html += line('<span class="cpp-brace">{</span> <span class="cpp-string">"event"</span>, <span class="cpp-string">"Инклюзивная IT-профориентация «Траектория роста»"</span> <span class="cpp-brace">}</span>,', 2);
+    html += line('<span class="cpp-brace">{</span> <span class="cpp-string">"talk"</span>,  <span class="cpp-string">"Сверхчеловек или раб машины? Как не быть обманутым ИИ"</span> <span class="cpp-brace">}</span>,', 2);
+    html += line('<span class="cpp-brace">}</span> <span class="cpp-brace">}</span>,', 1);
+    html += line('');
+    html += line('<span class="cpp-comment">// Публичные лекции</span>', 1);
+    html += line('<span class="cpp-brace">{</span> <span class="cpp-string">"public_lectures"</span>, <span class="cpp-brace">{</span>', 1);
+    html += line('<span class="cpp-brace">{</span> <span class="cpp-string">"period"</span>, <span class="cpp-string">"Апрель — Август 2025"</span> <span class="cpp-brace">}</span>,', 2);
+    html += line('<span class="cpp-brace">{</span> <span class="cpp-string">"series"</span>, <span class="cpp-string">"Лаборатория с Викторией Фирсановой"</span> <span class="cpp-brace">}</span>,', 2);
+    html += line('<span class="cpp-brace">{</span> <span class="cpp-string">"venue"</span>,  <span class="cpp-string">"Библиотека им. Лермонтова, Санкт-Петербург"</span> <span class="cpp-brace">}</span>,', 2);
+    html += line('<span class="cpp-brace">}</span> <span class="cpp-brace">}</span>,', 1);
+    html += line('<span class="cpp-brace">}</span>;');
+    html += '</div>';
+    html += '</details>';
+    html += '';
+
+    html += '<details class="code-block">';
+    html += '<summary>' + line('<span class="cpp-comment">// Публикации</span>') + '</summary>';
+    html += '<div class="block-content">';
+    html += line('<span class="cpp-keyword">auto</span> <span class="cpp-field">publications</span> = <span class="cpp-brace">{</span>');
+    html += line('');
+    html += line('<span class="cpp-comment">// 2025</span>', 1);
+    html += line('<span class="cpp-brace">{</span> <span class="cpp-string">"2025"</span>, <span class="cpp-brace">{</span>', 1);
+    html += line('<span class="cpp-string">"Verification of linguistic hypotheses applying LLM // Вестник ЧГУ. (ВАК, РИНЦ)"</span>,', 2);
+    html += line('<span class="cpp-string">"Виртуальный ассистент для нейроотличных студентов (Тезисы)"</span>,', 2);
+    html += line('<span class="cpp-string">"AGGILE: Automated Graph Generation // CEUR-WS. (Scopus)"</span>,', 2);
+    html += line('<span class="cpp-string">"Inclusive next-generation dialogue system // Вопросы совр. лингвистики. (ВАК, РИНЦ)"</span>,', 2);
+    html += line('<span class="cpp-brace">}</span> <span class="cpp-brace">}</span>,', 1);
+    html += line('');
+    html += line('<span class="cpp-comment">// 2024</span>', 1);
+    html += line('<span class="cpp-brace">{</span> <span class="cpp-string">"2024"</span>, <span class="cpp-brace">{</span>', 1);
+    html += line('<span class="cpp-string">"A graph-based approach to closed-domain NLG // Научный результат. (Scopus, ВАК)"</span>,', 2);
+    html += line('<span class="cpp-string">"What Do Text-to-Image Models Know // J. Math. Sciences. (Scopus)"</span>,', 2);
+    html += line('<span class="cpp-string">"Диалоговая система (с Сиверцевым Е.Ю.) // Глобальный научный потенциал. (ВАК)"</span>,', 2);
+    html += line('<span class="cpp-brace">}</span> <span class="cpp-brace">}</span>,', 1);
+    html += line('');
+    html += line('<span class="cpp-comment">// 2023</span>', 1);
+    html += line('<span class="cpp-brace">{</span> <span class="cpp-string">"2023"</span>, <span class="cpp-brace">{</span>', 1);
+    html += line('<span class="cpp-string">"Towards Building a Mobile App // WWW \'23 Companion. (Scopus)"</span>,', 2);
+    html += line('<span class="cpp-brace">}</span> <span class="cpp-brace">}</span>,', 1);
+    html += line('');
+    html += line('<span class="cpp-comment">// 2022</span>', 1);
+    html += line('<span class="cpp-brace">{</span> <span class="cpp-string">"2022"</span>, <span class="cpp-brace">{</span>', 1);
+    html += line('<span class="cpp-string">"Transformer Models for QA on ASD Dataset // CCIS. (Scopus, WoS)"</span>,', 2);
+    html += line('<span class="cpp-brace">}</span> <span class="cpp-brace">}</span>,', 1);
+    html += line('');
+    html += line('<span class="cpp-comment">// 2020 — 2021</span>', 1);
+    html += line('<span class="cpp-brace">{</span> <span class="cpp-string">"2020-2021"</span>, <span class="cpp-brace">{</span>', 1);
+    html += line('<span class="cpp-string">"QA Systems and Inclusion // CEUR-WS. 2021."</span>,', 2);
+    html += line('<span class="cpp-string">"Supporting the Inclusion // AINL. 2020."</span>,', 2);
+    html += line('<span class="cpp-string">"Dialogue Systems for People on the Spectrum // NeurIPS Workshop. 2020."</span>,', 2);
+    html += line('<span class="cpp-brace">}</span> <span class="cpp-brace">}</span>,', 1);
+    html += line('<span class="cpp-brace">}</span>;');
+    html += '</div>';
+    html += '</details>';
+    html += '';
+
+    html += '<details class="code-block">';
+    html += '<summary>' + line('<span class="cpp-comment">// Конференции и выступления</span>') + '</summary>';
+    html += '<div class="block-content">';
+    html += line('<span class="cpp-keyword">auto</span> <span class="cpp-field">conferences</span> = <span class="cpp-brace">{</span>');
+    html += line('');
+    html += line('<span class="cpp-brace">{</span> <span class="cpp-string">"2026"</span>, <span class="cpp-string">"LV научная конференция Университета ИТМО"</span> <span class="cpp-brace">}</span>,', 1);
+    html += line('<span class="cpp-brace">{</span> <span class="cpp-string">"2025"</span>, <span class="cpp-string">"Инклюзивное образование (ЮНЕСКО) — Приглашенный спикер"</span> <span class="cpp-brace">}</span>,', 1);
+    html += line('<span class="cpp-brace">{</span> <span class="cpp-string">"2025"</span>, <span class="cpp-string">"XAI-KG @ ESWC — AGGILE: Automated Graph Generation"</span> <span class="cpp-brace">}</span>,', 1);
+    html += line('<span class="cpp-brace">{</span> <span class="cpp-string">"2025"</span>, <span class="cpp-string">"ODS Data Fest — Организатор ML for Social Good"</span> <span class="cpp-brace">}</span>,', 1);
+    html += line('<span class="cpp-brace">{</span> <span class="cpp-string">"2024"</span>, <span class="cpp-string">"Interpretable AI Workshop (NeurIPS, Ванкувер)"</span> <span class="cpp-brace">}</span>,', 1);
+    html += line('<span class="cpp-brace">{</span> <span class="cpp-string">"2024"</span>, <span class="cpp-string">"Первый Евразийский конгресс лингвистов (РАН)"</span> <span class="cpp-brace">}</span>,', 1);
+    html += line('<span class="cpp-brace">{</span> <span class="cpp-string">"2024"</span>, <span class="cpp-string">"LiLaC (СПбГУ), FRUCT, Стачка"</span> <span class="cpp-brace">}</span>,', 1);
+    html += line('<span class="cpp-brace">{</span> <span class="cpp-string">"2020-23"</span>, <span class="cpp-string">"20+ докладов: ACM WebConf, AINL, Dialogue, СКИЛ РГГУ"</span> <span class="cpp-brace">}</span>,', 1);
+    html += line('<span class="cpp-brace">}</span>;');
+    html += '</div>';
+    html += '</details>';
+    html += '';
+
+    html += '<details class="code-block">';
+    html += '<summary>' + line('<span class="cpp-comment">// Повышение квалификации</span>') + '</summary>';
+    html += '<div class="block-content">';
+    html += line('<span class="cpp-keyword">auto</span> <span class="cpp-field">courses</span> = <span class="cpp-brace">{</span>');
+    html += line('<span class="cpp-string">"2024: Инклюзивная образовательная среда (ЯрГУ, 72 ч.)"</span>,');
+    html += line('<span class="cpp-string">"2023: Фронтиры прикладного ИИ (ИТМО, 72 ч.)"</span>,');
+    html += line('<span class="cpp-string">"2022: Introduction to AI (TU Berlin)"</span>,');
+    html += line('<span class="cpp-string">"2021: Школа Фонда Владимира Потанина"</span>,');
+    html += line('<span class="cpp-string">"2020: SMILES — Summer School of ML (Сколтех)"</span>,');
+    html += line('<span class="cpp-string">"2019: 3FS — Formal Syntax and Semantics (НИУ ВШЭ)"</span>,');
+    html += line('<span class="cpp-brace">}</span>;');
+    html += '</div>';
+    html += '</details>';
+    html += '';
+
+    html += '<details class="code-block">';
+    html += '<summary>' + line('<span class="cpp-comment">// Награды и достижения</span>') + '</summary>';
+    html += '<div class="block-content">';
+    html += line('<span class="cpp-keyword">auto</span> <span class="cpp-field">awards</span> = <span class="cpp-brace">{</span>');
+    html += line('<span class="cpp-string">"2025: Победитель «Практики личной филантропии» и «Профессиональное развитие» (Фонд Потанина)"</span>,');
+    html += line('<span class="cpp-string">"2024: Лучший преподаватель НИУ ВШЭ"</span>,');
+    html += line('<span class="cpp-string">"2021: Победитель Школы Фонда Потанина"</span>,');
+    html += line('<span class="cpp-string">"2020: Стипендиат Фонда Потанина"</span>,');
+    html += line('<span class="cpp-string">"2020: ODS Awards — Лучший проект и Лучший организатор"</span>,');
+    html += line('<span class="cpp-brace">}</span>;');
+    html += '</div>';
+    html += '</details>';
+    html += '';
+
+    html += '<details class="code-block">';
+    html += '<summary>' + line('<span class="cpp-comment">// Волонтерская деятельность</span>') + '</summary>';
+    html += '<div class="block-content">';
+    html += line('<span class="cpp-keyword">auto</span> <span class="cpp-field">volunteering</span> = <span class="cpp-brace">{</span>');
+    html += line('<span class="cpp-string">"2025 — н.в.: Руководитель первого инклюзивного IT-сообщества СПб"</span>,');
+    html += line('<span class="cpp-string">"2024: LLM Lab (НИУ ВШЭ), преподаватель в «ДизайнКод»"</span>,');
+    html += line('<span class="cpp-string">"2023: NLP-кружок для магистрантов (НИУ ВШЭ)"</span>,');
+    html += line('<span class="cpp-string">"2022: Со-организатор XXV конф. студентов-филологов"</span>,');
+    html += line('<span class="cpp-string">"2021-22: Разработка сайтов для НКО"</span>,');
+    html += line('<span class="cpp-string">"2020-21: Оргкомитет Corpora, IMS, NLP-клуб (ИТМО)"</span>,');
+    html += line('<span class="cpp-brace">}</span>;');
+    html += '</div>';
+    html += '</details>';
+    html += '';
+
+    html += '<details class="code-block">';
+    html += '<summary>' + line('<span class="cpp-comment">// Профессиональные навыки</span>') + '</summary>';
+    html += '<div class="block-content">';
+    html += line('<span class="cpp-keyword">struct</span> <span class="cpp-type">Skills</span> <span class="cpp-brace">{</span>');
+    html += line('');
+    html += line('<span class="cpp-type">vector</span>&lt;<span class="cpp-type">string</span>&gt; <span class="cpp-field">languages</span> = <span class="cpp-brace">{</span> <span class="cpp-string">"Английский C1"</span>, <span class="cpp-string">"Немецкий"</span>, <span class="cpp-string">"Французский"</span>, <span class="cpp-string">"Испанский"</span>, <span class="cpp-string">"Итальянский"</span> <span class="cpp-brace">}</span>;', 1);
+    html += line('<span class="cpp-type">vector</span>&lt;<span class="cpp-type">string</span>&gt; <span class="cpp-field">prog</span>      = <span class="cpp-brace">{</span> <span class="cpp-string">"Python"</span>, <span class="cpp-string">"C++"</span>, <span class="cpp-string">"Shell"</span>, <span class="cpp-string">"JavaScript"</span>, <span class="cpp-string">"Kotlin"</span>, <span class="cpp-string">"R"</span> <span class="cpp-brace">}</span>;', 1);
+    html += line('<span class="cpp-type">vector</span>&lt;<span class="cpp-type">string</span>&gt; <span class="cpp-field">ml</span>        = <span class="cpp-brace">{</span> <span class="cpp-string">"PyTorch"</span>, <span class="cpp-string">"Transformers"</span>, <span class="cpp-string">"LangChain"</span>, <span class="cpp-string">"llama.cpp"</span>, <span class="cpp-string">"RAG"</span>, <span class="cpp-string">"function-calling"</span> <span class="cpp-brace">}</span>;', 1);
+    html += line('<span class="cpp-type">vector</span>&lt;<span class="cpp-type">string</span>&gt; <span class="cpp-field">tools</span>     = <span class="cpp-brace">{</span> <span class="cpp-string">"Linux"</span>, <span class="cpp-string">"Git"</span>, <span class="cpp-string">"Docker"</span>, <span class="cpp-string">"FFmpeg"</span>, <span class="cpp-string">"CMake"</span>, <span class="cpp-string">"LaTeX"</span> <span class="cpp-brace">}</span>;', 1);
+    html += line('<span class="cpp-type">vector</span>&lt;<span class="cpp-type">string</span>&gt; <span class="cpp-field">db</span>        = <span class="cpp-brace">{</span> <span class="cpp-string">"PostgreSQL"</span>, <span class="cpp-string">"SQLite"</span>, <span class="cpp-string">"NoSQL"</span>, <span class="cpp-string">"Vector DBs"</span> <span class="cpp-brace">}</span>;', 1);
+    html += line('<span class="cpp-type">vector</span>&lt;<span class="cpp-type">string</span>&gt; <span class="cpp-field">web</span>       = <span class="cpp-brace">{</span> <span class="cpp-string">"HTML/CSS/JS"</span>, <span class="cpp-string">"Flask"</span>, <span class="cpp-string">"FastAPI"</span>, <span class="cpp-string">"WCAG 2.1"</span> <span class="cpp-brace">}</span>;', 1);
+    html += line('<span class="cpp-type">vector</span>&lt;<span class="cpp-type">string</span>&gt; <span class="cpp-field">core</span>      = <span class="cpp-brace">{</span> <span class="cpp-string">"Оптимизация LLM"</span>, <span class="cpp-string">"Инклюзивные технологии"</span>, <span class="cpp-string">"Мультиагентные системы"</span> <span class="cpp-brace">}</span>;', 1);
+    html += line('<span class="cpp-brace">}</span>;');
+    html += '</div>';
+    html += '</details>';
+    html += '';
+
+    html += line('');
+    html += line('<span class="cpp-type">int</span> <span class="cpp-field">main</span>() <span class="cpp-brace">{</span>');
+    html += line('<span class="cpp-type">cout</span> &lt;&lt; <span class="cpp-string">"CV загружен: Виктория Фирсанова"</span> &lt;&lt; endl;', 1);
+    html += line('<span class="cpp-type">cout</span> &lt;&lt; <span class="cpp-string">"Аспирант ИТМО | Преподаватель НИУ ВШЭ и МИЭТ"</span> &lt;&lt; endl;', 1);
+    html += line('<span class="cpp-type">cout</span> &lt;&lt; <span class="cpp-string">"Основатель первого инклюзивного IT-сообщества СПб"</span> &lt;&lt; endl;', 1);
+    html += line('<span class="cpp-keyword">return</span> <span class="cpp-number">0</span>;', 1);
+    html += line('<span class="cpp-brace">}</span>');
+
+    c.innerHTML = html;
+
+    let nums = '';
+    for (let i = 1; i <= 100; i++) {
+      nums += '<div>' + i + '</div>';
+    }
+    document.getElementById('lineNumbers').innerHTML = nums;
+  }
+
+  buildCV();
+
+  const codeArea = document.getElementById('codeContent');
+  const lineNumbers = document.getElementById('lineNumbers');
+  codeArea.addEventListener('scroll', () => {
+    lineNumbers.scrollTop = codeArea.scrollTop;
+  });
+</script>
+
 </body>
 </html>
